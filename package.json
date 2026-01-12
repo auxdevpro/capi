@@ -1,0 +1,20 @@
+{
+  "name": "capi",
+  "version": "1.0.0",
+  "description": "CRUD API class for JavaScript",
+  "homepage": "https://github.com/auxdevpro/capi#readme",
+  "bugs": {
+    "url": "https://github.com/auxdevpro/capi/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/auxdevpro/capi.git"
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "author": "Potapov Oleg",
+  "type": "module",
+  "main": "sample.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
