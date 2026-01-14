@@ -17,9 +17,9 @@ class CAPI {
    * Build full URL with base URL and endpoint
    */
   #buildURL(endpoint) {
-    if (endpoint.startsWith('http://') || endpoint.startsWith('https://')) {
+    if (endpoint.startsWith('http://') || endpoint.startsWith('https://'))
       return endpoint;
-    }
+
     return `${this.#baseURL}${endpoint}`;
   }
 
@@ -123,12 +123,78 @@ class CAPI {
     });
   }
 
+
+  //
+  // Alias methods mapping (semantic naming)
+  //
+  // Read Operations:
+  //   read()  → get()
+  //   fetch() → get()
+  //
+  // Create Operations:
+  //   create() → post()
+  //
+  // Update Operations:
+  //   update() → patch() // partial update
+  //   replace() → put()  // complete replacement
+  //
+  // Delete Operations:
+  //   remove() → delete()
+  //
+
+  /**
+   * Alias for GET - Read a resource
+   */
+  async read(endpoint, options = {}) {
+    return await this.get(endpoint, options);
+  }
+
+  /**
+   * Alias for GET - Fetch a resource
+   */
+  async fetch(endpoint, options = {}) {
+    return await this.get(endpoint, options);
+  }
+
+  /**
+   * Alias for POST - Create a new resource
+   */
+  async create(endpoint, data = null, options = {}) {
+    return await this.post(endpoint, data, options);
+  }
+
+  /**
+   * Alias for PATCH - Update a resource partially
+   */
+  async update(endpoint, data = null, options = {}) {
+    return await this.patch(endpoint, data, options);
+  }
+
+  /**
+   * Alias for PUT - Replace a resource completely
+   */
+  async replace(endpoint, data = null, options = {}) {
+    return await this.put(endpoint, data, options);
+  }
+
+  /**
+   * Alias for DELETE - Remove a resource
+   */
+  async remove(endpoint, options = {}) {
+    return await this.delete(endpoint, options);
+  }
+
+
+  // 
+  // Authorization: Bearer token / Basic auth
+  //
+
   /**
    * Set authorization token
    */
   setAuthToken(token) {
     this.#headers['Authorization'] = `Bearer ${token}`;
-                  //'Authorization'  : `Basic ${this.#credB64}`
+                //'Authorization'  : `Basic ${this.#credB64}`
   }
 
   /**
@@ -137,6 +203,10 @@ class CAPI {
   removeAuthToken() {
     delete this.#headers['Authorization'];
   }
+
+  //
+  // Headers manage
+  //
 
   /**
    * Update headers
